@@ -1,0 +1,308 @@
+{
+  "sections": [
+    {
+      "title": "基础生成",
+      "icon": "qrcode",
+      "items": [
+        {
+          "title": "纯文本二维码",
+          "subtitle": "生成包含文本内容的基础二维码",
+          "type": "generate_basic",
+          "params": {
+            "content": "Hello, QRCode!",
+            "size": "300",
+            "correctionLevel": "M"
+          }
+        },
+        {
+          "title": "自定义尺寸",
+          "subtitle": "支持不同尺寸输出 200/300/500",
+          "type": "generate_size",
+          "params": {
+            "content": "Size Demo",
+            "sizes": "200,300,500"
+          }
+        },
+        {
+          "title": "纠错等级对比",
+          "subtitle": "L/M/Q/H 四种纠错等级效果",
+          "type": "generate_correction",
+          "params": {
+            "content": "Error Correction Level Demo"
+          }
+        },
+        {
+          "title": "自定义颜色",
+          "subtitle": "自定义前景色和背景色",
+          "type": "generate_color",
+          "params": {
+            "content": "Color Demo",
+            "foreground": "#1E88E5",
+            "background": "#FFF8E1"
+          }
+        }
+      ]
+    },
+    {
+      "title": "高级样式",
+      "icon": "paintbrush.pointed",
+      "items": [
+        {
+          "title": "嵌入Logo",
+          "subtitle": "在二维码中心嵌入Logo图标",
+          "type": "style_logo",
+          "params": {
+            "content": "Logo QRCode",
+            "logoCornerRadius": "12",
+            "logoSizeRatio": "0.2"
+          }
+        },
+        {
+          "title": "圆角矩形码点",
+          "subtitle": "使用圆角矩形替代方形码点",
+          "type": "style_dot",
+          "params": {
+            "content": "RoundedRect Dot Style",
+            "dotStyle": "roundedRect"
+          }
+        },
+        {
+          "title": "星形码点",
+          "subtitle": "使用星形图案作为码点样式",
+          "type": "style_dot",
+          "params": {
+            "content": "Star Dot Style",
+            "dotStyle": "star"
+          }
+        },
+        {
+          "title": "心形码点",
+          "subtitle": "使用心形图案作为码点样式",
+          "type": "style_dot",
+          "params": {
+            "content": "Heart Dot Style",
+            "dotStyle": "heart"
+          }
+        },
+        {
+          "title": "菱形码点",
+          "subtitle": "使用菱形图案作为码点样式",
+          "type": "style_dot",
+          "params": {
+            "content": "Diamond Dot Style",
+            "dotStyle": "diamond"
+          }
+        },
+        {
+          "title": "圆形码点",
+          "subtitle": "使用圆形图案作为码点样式",
+          "type": "style_dot",
+          "params": {
+            "content": "Circle Dot Style",
+            "dotStyle": "circle"
+          }
+        },
+        {
+          "title": "渐变前景色",
+          "subtitle": "从蓝色渐变到紫色的前景",
+          "type": "style_gradient",
+          "params": {
+            "content": "Gradient QRCode",
+            "startColor": "#2196F3",
+            "endColor": "#9C27B0",
+            "direction": "topToBottom"
+          }
+        },
+        {
+          "title": "背景图融合",
+          "subtitle": "将二维码与背景图片融合",
+          "type": "style_background",
+          "params": {
+            "content": "Background Fusion Demo",
+            "alpha": "0.3"
+          }
+        }
+      ]
+    },
+    {
+      "title": "艺术化效果",
+      "icon": "wand.and.stars",
+      "items": [
+        {
+          "title": "旋转二维码",
+          "subtitle": "将二维码旋转任意角度",
+          "type": "art_rotation",
+          "params": {
+            "content": "Rotated QRCode",
+            "angle": "45"
+          }
+        },
+        {
+          "title": "水印叠加",
+          "subtitle": "在二维码上叠加水印图案",
+          "type": "art_watermark",
+          "params": {
+            "content": "Watermark Demo"
+          }
+        },
+        {
+          "title": "高斯模糊",
+          "subtitle": "为二维码添加模糊效果",
+          "type": "art_blur",
+          "params": {
+            "content": "Blur Effect Demo",
+            "radius": "2"
+          }
+        },
+        {
+          "title": "GIF动图二维码",
+          "subtitle": "生成动态变化的GIF二维码",
+          "type": "art_gif",
+          "params": {
+            "contents": "Frame1,Frame2,Frame3,Frame4",
+            "frameDuration": "0.5"
+          }
+        }
+      ]
+    },
+    {
+      "title": "识别功能",
+      "icon": "camera.viewfinder",
+      "items": [
+        {
+          "title": "相册识别",
+          "subtitle": "从相册选择图片识别二维码",
+          "type": "recognize_album",
+          "params": {}
+        },
+        {
+          "title": "摄像头实时识别",
+          "subtitle": "通过摄像头实时扫描识别",
+          "type": "recognize_camera",
+          "params": {}
+        },
+        {
+          "title": "批量识别",
+          "subtitle": "同时识别多张图片中的二维码",
+          "type": "recognize_batch",
+          "params": {}
+        },
+        {
+          "title": "自定义识别区域",
+          "subtitle": "限定识别区域提高准确率",
+          "type": "recognize_region",
+          "params": {
+            "x": "0.2",
+            "y": "0.2",
+            "width": "0.6",
+            "height": "0.6"
+          }
+        }
+      ]
+    },
+    {
+      "title": "编码格式",
+      "icon": "doc.text.magnifyingglass",
+      "items": [
+        {
+          "title": "普通文本",
+          "subtitle": "编码纯文本内容",
+          "type": "encode_text",
+          "params": {
+            "text": "这是一段测试文本，支持中文和English混合内容。"
+          }
+        },
+        {
+          "title": "URL链接",
+          "subtitle": "编码网页链接",
+          "type": "encode_url",
+          "params": {
+            "url": "https://www.apple.com/swift"
+          }
+        },
+        {
+          "title": "名片信息",
+          "subtitle": "编码vCard格式名片",
+          "type": "encode_vcard",
+          "params": {
+            "name": "张三",
+            "phone": "+86-13800138000",
+            "email": "zhangsan@example.com",
+            "org": "Apple Inc."
+          }
+        },
+        {
+          "title": "WiFi配置",
+          "subtitle": "编码WiFi连接信息",
+          "type": "encode_wifi",
+          "params": {
+            "ssid": "MyHomeWiFi",
+            "password": "password123",
+            "encryption": "WPA"
+          }
+        },
+        {
+          "title": "地理位置",
+          "subtitle": "编码经纬度坐标",
+          "type": "encode_geo",
+          "params": {
+            "latitude": "39.9042",
+            "longitude": "116.4074",
+            "label": "北京天安门"
+          }
+        },
+        {
+          "title": "邮箱",
+          "subtitle": "编码邮件地址和主题",
+          "type": "encode_email",
+          "params": {
+            "address": "hello@example.com",
+            "subject": "Hello from QRCode",
+            "body": "这是通过二维码发送的邮件"
+          }
+        },
+        {
+          "title": "电话号码",
+          "subtitle": "编码电话拨打信息",
+          "type": "encode_phone",
+          "params": {
+            "number": "+86-10-12345678"
+          }
+        }
+      ]
+    },
+    {
+      "title": "性能优化",
+      "icon": "speedometer",
+      "items": [
+        {
+          "title": "异步生成",
+          "subtitle": "异步生成避免阻塞主线程",
+          "type": "perf_async",
+          "params": {
+            "content": "Async Generation Demo",
+            "count": "10"
+          }
+        },
+        {
+          "title": "缓存机制",
+          "subtitle": "展示缓存命中加速效果",
+          "type": "perf_cache",
+          "params": {
+            "content": "Cache Demo",
+            "iterations": "5"
+          }
+        },
+        {
+          "title": "批量生成",
+          "subtitle": "大规模生成时的内存控制",
+          "type": "perf_batch",
+          "params": {
+            "count": "20",
+            "prefix": "Batch Item #"
+          }
+        }
+      ]
+    }
+  ]
+}
