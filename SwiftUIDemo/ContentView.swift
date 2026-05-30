@@ -106,6 +106,13 @@ struct ContentView: View {
                         Label("QRCodeKit", systemImage: "qrcode")
                     }
                 }
+                Section("侧滑菜单") {
+                    NavigationLink {
+                        SlideMenuDemoView()
+                    } label: {
+                        Label("SlideMenu", systemImage: "sidebar.left")
+                    }
+                }
                 Section("组件演示") {
                     NavigationLink {
                         SkeletonViewDemoView()

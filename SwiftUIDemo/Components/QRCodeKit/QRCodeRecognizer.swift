@@ -1,6 +1,7 @@
 import UIKit
 import AVFoundation
 import Vision
+import Combine
 
 // MARK: - QR Code Recognizer
 
@@ -81,12 +82,19 @@ protocol QRCameraScannerDelegate: AnyObject {
 
 // MARK: - Camera Scanner
 
-final class QRCameraScanner: NSObject, ObservableObject {
-    @Published var scannedResults: [QRRecognitionResult] = []
-    @Published var isScanning = false
+final class QRCameraScanner: ObservableObject {
+    let objectWillChange = ObservableObjectPublisher()
+
+    var scannedResults: [QRRecognitionResult] = [] {
+        willSet { objectWillChange.send() }
+    }
+    var isScanning = false {
+        willSet { objectWillChange.send() }
+    }
 
     let captureSession = AVCaptureSession()
     private let metadataOutput = AVCaptureMetadataOutput()
+    private var metadataDelegate: MetadataDelegate?
     weak var delegate: QRCameraScannerDelegate?
     var scanRegion: CGRect?
 
@@ -100,7 +108,12 @@ final class QRCameraScanner: NSObject, ObservableObject {
 
         if captureSession.canAddOutput(metadataOutput) {
             captureSession.addOutput(metadataOutput)
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            let metadataDelegate = MetadataDelegate { [weak self] results in
+                self?.scannedResults = results
+                self?.delegate?.didDetectQRCodes(results)
+            }
+            self.metadataDelegate = metadataDelegate
+            metadataOutput.setMetadataObjectsDelegate(metadataDelegate, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         }
 
@@ -129,7 +142,15 @@ final class QRCameraScanner: NSObject, ObservableObject {
     }
 }
 
-extension QRCameraScanner: AVCaptureMetadataOutputObjectsDelegate {
+// MARK: - Metadata Delegate
+
+private class MetadataDelegate: NSObject, AVCaptureMetadataOutputObjectsDelegate {
+    let onResults: ([QRRecognitionResult]) -> Void
+
+    init(onResults: @escaping ([QRRecognitionResult]) -> Void) {
+        self.onResults = onResults
+    }
+
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         let results = metadataObjects.compactMap { object -> QRRecognitionResult? in
             guard let readable = object as? AVMetadataMachineReadableCodeObject,
@@ -137,12 +158,11 @@ extension QRCameraScanner: AVCaptureMetadataOutputObjectsDelegate {
                   let content = readable.stringValue else { return nil }
 
             let bounds = readable.bounds
-            let corners = readable.corners?.map { $0 } ?? []
+            let corners = readable.corners.map { $0 }
 
             return QRRecognitionResult(content: content, bounds: bounds, corners: corners)
         }
 
-        scannedResults = results
-        delegate?.didDetectQRCodes(results)
+        onResults(results)
     }
 }

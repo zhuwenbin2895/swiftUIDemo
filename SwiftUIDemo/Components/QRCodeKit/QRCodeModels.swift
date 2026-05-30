@@ -173,11 +173,15 @@ struct QRGenerationConfig {
 
 // MARK: - QR Recognition Result
 
-struct QRRecognitionResult: Identifiable {
+struct QRRecognitionResult: Identifiable, Equatable {
     let id = UUID()
     let content: String
     let bounds: CGRect
     let corners: [CGPoint]
+
+    static func == (lhs: QRRecognitionResult, rhs: QRRecognitionResult) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 // MARK: - Demo Mock Data
